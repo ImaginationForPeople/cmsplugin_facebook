@@ -1,38 +1,22 @@
 {% comment %}
 <!-- Example from Facebook website: -->
-<!-- 
-<iframe src="http://www.facebook.com/plugins/likebox.php?
-	href=http%3A%2F%2Fwww.facebook.com%2Fplatform&amp;width=292&amp;
-	colorscheme=light&amp;connections=10&amp;
-	stream=true&amp;
-	header=true&amp;
-	height=587" 
-	scrolling="no" 
-	frameborder="0" 
-	style="border:none; 
-	overflow:hidden; 
-	width:292px; 
-	height:587px;" 
-	allowTransparency="true">
+<!--<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/fr_FR/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like-box" data-href="http://www.facebook.com/platform" data-width="292" data-colorscheme="dark" data-show-faces="false" data-stream="true" data-header="false"></div>
 </iframe> -->
 {% endcomment %}
-<iframe src="http://www.facebook.com/plugins/likebox.php?
-	href={% autoescape on %}{{ instance.pageurl }}{% endautoescape %}&amp;
-	width={% if instance.width %}{{ instance.width }}{% else %}{{ width|default:295 }}{% endif %}&amp;
-	connections={{ instance.connections }}&amp;
-	stream={% if instance.stream %}true{% else %}false{% endif %}&amp;
-	header={% if instance.header %}true{% else %}false{% endif %}&amp;
-	height={{ instance.height }}" 
-	scrolling="no" 
-	frameborder="0" 
-	style="border:none; 
-	overflow:auto; 
-	width:{% if instance.width %}{{ instance.width }}{% else %}{{ width|default:295 }}{% endif %}px; 
-	height:{{ instance.height }}px;" 
-    allowTransparency="
-        {% if instance.transparent %}
-            true
-        {% else %}
-            false
-        {% endif %}">
-</iframe>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/fr_FR/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like-box" data-href="{% autoescape on %}{{ instance.pageurl }}{% endautoescape %}" data-width="{% if instance.width %}{{ instance.width }}{% else %}{{ width|default:295 }}{% endif %}" data-colorscheme="dark" data-show-faces="{% if instance.connections %}true{% else %}false{% endif %}" data-stream="{% if instance.stream %}true{% else %}false{% endif %}" data-header="{% if instance.header %}true{% else %}false{% endif %}"></div>
