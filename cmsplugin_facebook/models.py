@@ -63,9 +63,7 @@ class FacebookLikeBox(CMSPlugin):
         null=True,
         blank=True,
         default=None)
-    connections = models.PositiveSmallIntegerField(_("Amount of Users"),
-        default=10)
-    transparent = models.BooleanField(_("Transparent"),
+    connections = models.BooleanField(_("Show users' faces"),
         default=True)
     stream = models.BooleanField(_("Show stream"),
         default=True)
