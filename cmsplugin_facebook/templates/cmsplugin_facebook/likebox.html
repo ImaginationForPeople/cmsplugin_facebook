@@ -11,12 +11,29 @@
 <div class="fb-like-box" data-href="http://www.facebook.com/platform" data-width="292" data-colorscheme="dark" data-show-faces="false" data-stream="true" data-header="false"></div>
 </iframe> -->
 {% endcomment %}
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/fr_FR/all.js#xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
+<script>
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        if (!d.getElementById("fb-root")) {
+            var div = d.createElement("div");
+            div.id = "fb-root";
+            fjs.parentNode.insertBefore(div, fjs);
+        }
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/fr_FR/all.js#xfbml=1";
+        js.setAttribute("class", "cmsplugin_facebook");
+        fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-<div class="fb-like-box" data-href="{% autoescape on %}{{ instance.pageurl }}{% endautoescape %}" data-width="{% if instance.width %}{{ instance.width }}{% else %}{{ width|default:295 }}{% endif %}" data-colorscheme="dark" data-show-faces="{% if instance.connections %}true{% else %}false{% endif %}" data-stream="{% if instance.stream %}true{% else %}false{% endif %}" data-header="{% if instance.header %}true{% else %}false{% endif %}"></div>
+<div class="fb-like-box" 
+    data-href="{% autoescape on %}{{ instance.pageurl }}{% endautoescape %}"
+{% if instance.height %}
+    data-height="{{ instance.height }}" 
+{% endif %}
+{% if instance.width %}
+    data-width="{{ instance.width }}" 
+{% endif %}
+data-colorscheme="{{ instance.colorscheme }}" 
+    data-show-faces="{% if instance.connections %}true{% else %}false{% endif %}" 
+    data-stream="{% if instance.stream %}true{% else %}false{% endif %}" 
+    data-header="{% if instance.header %}true{% else %}false{% endif %}"></div>
