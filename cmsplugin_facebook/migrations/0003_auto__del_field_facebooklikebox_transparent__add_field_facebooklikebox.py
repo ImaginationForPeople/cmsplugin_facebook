@@ -18,8 +18,10 @@ class Migration(SchemaMigration):
         db.alter_column('cmsplugin_facebooklikebox', 'height', self.gf('django.db.models.fields.PositiveSmallIntegerField')(null=True))
 
         # Changing field 'FacebookLikeBox.connections'
-        db.alter_column('cmsplugin_facebooklikebox', 'connections', self.gf('django.db.models.fields.BooleanField')())
-
+	# Using db.alter_column does not work on recent postgres.  See http://south.aeracode.org/ticket/484
+	# I know it's lossy (connection will revert to default value, but I see no way around that that wouldn't break previous successfull migrations) 
+	db.delete_column('cmsplugin_facebooklikebox', 'connections')
+	db.add_column('cmsplugin_facebooklikebox', 'connections', self.gf('django.db.models.fields.BooleanField')(default=True))
 
     def backwards(self, orm):
         
@@ -33,7 +35,8 @@ class Migration(SchemaMigration):
         db.alter_column('cmsplugin_facebooklikebox', 'height', self.gf('django.db.models.fields.PositiveSmallIntegerField')())
 
         # Changing field 'FacebookLikeBox.connections'
-        db.alter_column('cmsplugin_facebooklikebox', 'connections', self.gf('django.db.models.fields.PositiveSmallIntegerField')())
+        db.delete_column('cmsplugin_facebooklikebox', 'connections')
+        db.add_column('cmsplugin_facebooklikebox', 'connections', self.gf('django.db.models.fields.PositiveSmallIntegerField')(default=True))
 
 
     models = {
